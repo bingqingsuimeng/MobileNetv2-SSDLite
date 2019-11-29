@@ -1,7 +1,7 @@
 import numpy as np  
 import sys,os  
-caffe_root = '/home/yaochuanqi/work/ssd/caffe/'
-sys.path.insert(0, caffe_root + 'python')  
+#caffe_root = '/home/yaochuanqi/work/ssd/caffe/'
+#sys.path.insert(0, caffe_root + 'python')  
 import caffe  
 
 deploy_proto = 'deploy.prototxt'  
@@ -19,9 +19,9 @@ def load_weights(path, shape=None):
     return weights
 
 def load_data(net):
-    for key in net.params.iterkeys():
+    for key in net.params.keys():
         if type(net.params[key]) is caffe._caffe.BlobVec:
-            print key
+            print(key)
             if 'mbox' not in key and (key.startswith("conv") or key.startswith("Conv") or key.startswith("layer")):
                 print('conv')
                 if key.endswith("/bn"):
@@ -57,7 +57,7 @@ def load_data(net):
                     net.params[key][0].data[...] = load_weights(prefix + '_gamma.dat')
                     net.params[key][1].data[...] = load_weights(prefix + '_beta.dat')
                 else:
-                    print key
+                    print(key)
                     net.params[key][0].data[...] = load_weights(prefix + '_weights.dat', net.params[key][0].data.shape)
                     if len(net.params[key]) > 1:
                         net.params[key][1].data[...] = load_weights(prefix + '_biases.dat')

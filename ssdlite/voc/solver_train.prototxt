@@ -1,10 +1,10 @@
 net: "train.prototxt"
-base_lr: 0.00001
+base_lr: 0.001
 display: 10
-max_iter: 120000
+max_iter: 60000
 lr_policy: "multistep"
 gamma: 0.5
-weight_decay: 0.00001
+weight_decay: 0.01
 snapshot: 1000
 snapshot_prefix: "snapshot/mobilenet"
 solver_mode: GPU

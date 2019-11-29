@@ -60,7 +60,7 @@ with tf.Session() as sess:
          elif  'BoxPredictor' in names[0]:
               layer_name = names[0] + '_' + names[1]
          output_name = layer_name + "_"  + paratype
-         print output_name
+         print(output_name)
          #print ts.get_shape()
          
          if len(data.shape) == 4:
@@ -105,7 +105,7 @@ with tf.Session() as sess:
                          new_weights[5] = tmp[4]
                          caffe_weights = new_weights.reshape(origin_shape).copy()
              caffe_weights.tofile(os.path.join(save_dir, output_name + '.dat'))
-             print caffe_weights.shape
+             print(caffe_weights.shape)
          else:
              caffe_bias = data
              boxes = 0
@@ -145,6 +145,6 @@ with tf.Session() as sess:
                          new_bias[1] = tmp[1]
                          new_bias[2] = tmp[2]
                          caffe_bias = new_bias.flatten()
-                 print caffe_bias.shape
+                 print(caffe_bias.shape)
              caffe_bias.tofile(os.path.join(save_dir, output_name + '.dat'))
 

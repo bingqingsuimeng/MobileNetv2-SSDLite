@@ -9,14 +9,14 @@ import caffe
 def load_net(net, net2):
     #maps = [0,5,2,15,9,40,6,3,16,57,20,61,17,18,4,1,59,19,58,7,63]
     maps = [0,5,2,16,9,44,6,3,17,62,21,67,18,19,4,1,64,20,63,7,72]
-    for key in net.params.iterkeys():
+    for key in net.params.keys():
         if type(net.params[key]) is not caffe._caffe.BlobVec:
             break
         else:
             if key.endswith('mbox_conf'):
                 for i in range(len(net.params[key])):
                     wt = net.params[key][i].data
-                    x = wt.shape[0] / 91
+                    x = int(wt.shape[0] / 91)
                     wt = wt.reshape(x, 91, -1)
                     neww = np.ones((x, 21, wt.shape[2]))
                     print(neww.shape)
